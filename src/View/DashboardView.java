@@ -28,11 +28,12 @@ public class DashboardView extends javax.swing.JFrame {
      * Creates new form Dashboard1
      */
     private JPanel animePanel;
+    private JPanel bookmarkPanel;
 
     ControllerAnime controller;
     ControllerBookmark controllerBookmark;
     
-    int ID;
+    public static int ID;
     int page;
 
     public DashboardView(int ID, int page) {
@@ -48,15 +49,22 @@ public class DashboardView extends javax.swing.JFrame {
         animePanel.setLayout(new BoxLayout(animePanel, BoxLayout.Y_AXIS));
         animePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         animePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        
+        bookmarkPanel = new JPanel();
+        bookmarkPanel.setLayout(new BoxLayout(bookmarkPanel, BoxLayout.Y_AXIS));
+        bookmarkPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+        bookmarkPanel.setAlignmentX(Component.LEFT_ALIGNMENT);
 
 // Atur scroll pane langsung
         jScrollPane1.setViewportView(animePanel);
-
+        jScrollPane2.setViewportView(bookmarkPanel);
+        controllerBookmark = new ControllerBookmark(this);
         controller.fetchAnime(this.page, this.ID);
     }
 
     public void displayAnimeList(List<ModelAnime> animeList, List<ModelBookmark> bookmarkList) {
         animePanel.removeAll();
+        bookmarkPanel.removeAll();
 
         for (ModelAnime anime : animeList) {
             JPanel itemPanel = new JPanel(new BorderLayout(10, 0));
@@ -115,8 +123,9 @@ public class DashboardView extends javax.swing.JFrame {
 
                         if (input == 0) {
                            
-                           
-//                              
+                           controllerBookmark.hapusBookmark(ID, anime.getId());
+                           controller.fetchAnime(page, ID);
+//                         
 //                            
 //                            JOptionPane.showMessageDialog(null, "Berhasil menghapus data.");
 //
@@ -136,8 +145,9 @@ public class DashboardView extends javax.swing.JFrame {
                     public void actionPerformed(ActionEvent e) {
                         int userID = DashboardView.this.ID;
                         System.out.println("ID User " + userID);
-                        PopUpView popUp = new PopUpView(anime, userID);
+                        PopUpView popUp = new PopUpView(anime, userID, DashboardView.this);
                         popUp.setVisible(true);
+                        
                     }
                     
 
@@ -158,9 +168,112 @@ public class DashboardView extends javax.swing.JFrame {
 
             animePanel.add(itemPanel);
         }
+        
+        for (ModelBookmark bookmark : bookmarkList) {
+            JPanel itemPanel2 = new JPanel(new BorderLayout(10, 0));
+            itemPanel2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+            itemPanel2.setMaximumSize(new Dimension(Integer.MAX_VALUE, 160));
+
+            // Gambar
+            JLabel imageLabel2 = new JLabel();
+            imageLabel2.setPreferredSize(new Dimension(100, 140));
+            try {
+                ImageIcon icon2 = new ImageIcon(new java.net.URL(bookmark.getImgUrlAnime()));
+                Image scaledImage = icon2.getImage().getScaledInstance(100, 140, Image.SCALE_SMOOTH);
+                imageLabel2.setIcon(new ImageIcon(scaledImage));
+            } catch (Exception e) {
+                imageLabel2.setText("No Image");
+            }
+
+            // Info
+            JPanel infoPanel2 = new JPanel();
+            infoPanel2.setLayout(new BoxLayout(infoPanel2, BoxLayout.Y_AXIS));
+
+            JLabel titleLabel = new JLabel("<html><b>" + bookmark.getAnimeTitle() + "</b></html>");
+            titleLabel.setFont(new Font("SansSerif", Font.BOLD, 14));
+
+//            JLabel ratingLabel = new JLabel("Rating: " + anime.getRating());
+//            ratingLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
+
+            String catatan = bookmark.getCatatan();
+            if (catatan != null && catatan.length() > 250) {
+                catatan = catatan.substring(0, 250) + "...";
+            }
+            JLabel catatanLabel = new JLabel("<html><p style='width:600px;'>" + catatan + "</p></html>");
+            catatanLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
+
+//            JButton bookmarkButton;
+//            boolean isBookmarked = false;
+//
+//            for (ModelBookmark bookmark : bookmarkList) {
+//                if (anime.getId() == bookmark.getIdAnime()) {
+//                    isBookmarked = true;
+//                    break;
+//                }
+//            }
+//
+//            if (isBookmarked) {
+//                bookmarkButton = new JButton("Remove Bookmark");
+//                bookmarkButton.addActionListener(new ActionListener() {
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//                        int input = JOptionPane.showConfirmDialog(
+//                                null,
+//                                "Remove Bookmark " + anime.getTitle() + "?",
+//                                "Hapus Mahasiswa",
+//                                JOptionPane.YES_NO_OPTION
+//                        );
+//
+//                        if (input == 0) {
+//                           
+//                           controllerBookmark.hapusBookmark(ID, anime.getId());
+////                              
+////                            
+////                            JOptionPane.showMessageDialog(null, "Berhasil menghapus data.");
+////
+////                            
+////                            showAllDosen();
+//                        }
+//                    }
+//
+//                });
+//            } else {
+//                
+//                bookmarkButton = new JButton("Bookmark");
+//                bookmarkButton.addActionListener(new ActionListener() {
+//                    
+//                    
+//                    @Override
+//                    public void actionPerformed(ActionEvent e) {
+//                        int userID = DashboardView.this.ID;
+//                        System.out.println("ID User " + userID);
+//                        PopUpView popUp = new PopUpView(anime, userID);
+//                        popUp.setVisible(true);
+//                    }
+//                    
+//
+//                });
+//            }
+
+            infoPanel2.add(titleLabel);
+//            infoPanel2.add(Box.createVerticalStrut(5));
+//            infoPanel2.add(ratingLabel);
+            infoPanel2.add(Box.createVerticalStrut(5));
+            infoPanel2.add(catatanLabel);
+//            infoPanel2.add(Box.createVerticalStrut(5));
+//            infoPanel2.add(bookmarkButton);
+
+            itemPanel2.add(imageLabel2, BorderLayout.WEST);
+            itemPanel2.add(infoPanel2, BorderLayout.CENTER);
+            itemPanel2.setPreferredSize(new Dimension(1800, 160)); // atau nilai besar lainnya
+
+            bookmarkPanel.add(itemPanel2);
+        }
 
         animePanel.revalidate();
         animePanel.repaint();
+        bookmarkPanel.revalidate();
+        bookmarkPanel.repaint();
 
     }
 
@@ -366,7 +479,13 @@ public class DashboardView extends javax.swing.JFrame {
     private void searchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchInputActionPerformed
-
+    public int getIdUser(){
+        return this.ID;
+    }
+    
+    public int getAnimePage(){
+        return this.page;
+    }
     /**
      * @param args the command line arguments
      */

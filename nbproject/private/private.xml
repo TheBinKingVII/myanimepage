@@ -3,7 +3,22 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/project-pbo-1-main/src/Main/Main.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Model/Anime/ModelAnime.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/View/DashboardView.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Controller/ControllerUser.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Model/Users/DAOUser.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Model/Bookmark/InterfaceDAOBookmark.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Model/Connector.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Model/Anime/DAOAnime.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Controller/ControllerBookmark.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Model/Bookmark/DAOBookmark.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Main/Main.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Controller/ControllerAnime.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/View/PopUpView.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/View/LoginView.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Model/Users/InterfaceDAOUser.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Model/Anime/InterfaceDAOAnime.java</file>
+            <file>file:/D:/KULIAH/Sems%204/Praktikum%20PBO/myanimepage/src/Model/Bookmark/ModelBookmark.java</file>
         </group>
     </open-files>
 </project-private>

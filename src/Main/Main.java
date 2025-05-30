@@ -7,6 +7,7 @@ package Main;
 
 import View.DashboardView;
 import View.DashboardView;
+import View.LoginView;
 import View.RegisterView;
 
 /**
@@ -20,8 +21,11 @@ public class Main {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        RegisterView register = new RegisterView();
-        register.setVisible(true);
+//        RegisterView register = new RegisterView();
+//        register.setVisible(true);
+        
+        LoginView login = new LoginView();
+        login.setVisible(true);
         
 //        DashboardView dashboard = new DashboardView(1,1);
 //        dashboard.setVisible(true);

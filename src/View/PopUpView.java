@@ -19,11 +19,13 @@ public class PopUpView extends javax.swing.JFrame {
     public static ModelAnime animeBookmark;
     public static int ID;
     ControllerBookmark controller;
+    public static DashboardView halamaDashboard;
 
-    public PopUpView(ModelAnime anime, int ID) {
+    public PopUpView(ModelAnime anime, int ID, DashboardView halamanDashboard) {
         initComponents();
         animeBookmark = anime;
         this.ID = ID;
+        this.halamaDashboard = halamanDashboard;
         jLabel1.setText("Judul Anime : " + anime.getTitle());
         jLabel2.setText("Score Anime : " + anime.getRating());
 
@@ -150,7 +152,7 @@ public class PopUpView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        controller = new ControllerBookmark(this); // Baru dibuat saat tombol ditekan
+        controller = new ControllerBookmark(this, halamaDashboard); // Baru dibuat saat tombol ditekan
         controller.tambahBookmark();
         dispose();
 
@@ -201,7 +203,7 @@ public class PopUpView extends javax.swing.JFrame {
 
             public void run() {
                 System.out.println("ID User " + ID);
-                new PopUpView(animeBookmark, this.ID).setVisible(true);
+                new PopUpView(animeBookmark, this.ID, halamaDashboard).setVisible(true);
 
             }
         });
