@@ -17,7 +17,7 @@ import java.util.List;
  * @author BINTORO
  */
 public class ControllerBookmark {
-    
+
     InterfaceDAOBookmark daoBookmark;
     List<ModelBookmark> listBookmark;
     List<ModelAnime> listAnime;
@@ -26,10 +26,9 @@ public class ControllerBookmark {
     ModelBookmark bookmark;
     ModelAnime anime;
     ControllerAnime controllerAnime;
-    
-    
+
     public ControllerBookmark(PopUpView halamanPopUp, DashboardView halamaDashboard) {
-        
+
         this.halamanPopUp = halamanPopUp;
         this.daoBookmark = new DAOBookmark();
         anime = halamanPopUp.getAnime();
@@ -39,29 +38,30 @@ public class ControllerBookmark {
         bookmark.setAnimeTitle(anime.getTitle());
         bookmark.setImgUrlAnime(anime.getImageUrl());
         bookmark.setCatatan(halamanPopUp.getCatatan());
-        this.halamanDashboard = halamaDashboard; 
+        this.halamanDashboard = halamaDashboard;
         controllerAnime = new ControllerAnime(this.halamanDashboard);
-        
+
     }
-    
+
     public ControllerBookmark(DashboardView halamanDashboard) {
         this.halamanDashboard = halamanDashboard;
         this.daoBookmark = new DAOBookmark();
     }
-    
-    public void tambahBookmark(){
-        
+
+    public void tambahBookmark() {
+
         daoBookmark.insertBookmark(bookmark);
         controllerAnime.fetchAnime(halamanDashboard.getAnimePage(), halamanDashboard.getIdUser());
-        
-        
+
     }
-    
-    public void hapusBookmark(int ID, int IdAnime){
+
+    public void hapusBookmark(int ID, int IdAnime) {
         daoBookmark.deleteBookmark(ID, IdAnime);
     }
-    
-    
-    
-    
+
+    public void editBookmark() {
+        daoBookmark.updateBookmark(bookmark);
+        controllerAnime.fetchAnime(halamanDashboard.getAnimePage(), halamanDashboard.getIdUser());
+    }
+
 }

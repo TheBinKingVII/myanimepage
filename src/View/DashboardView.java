@@ -29,10 +29,10 @@ public class DashboardView extends javax.swing.JFrame {
      */
     private JPanel animePanel;
     private JPanel bookmarkPanel;
-
+   
     ControllerAnime controller;
     ControllerBookmark controllerBookmark;
-    
+
     public static int ID;
     int page;
 
@@ -41,7 +41,6 @@ public class DashboardView extends javax.swing.JFrame {
         this.ID = ID;
         this.page = page;
         controller = new ControllerAnime(this);
-        
 
         System.out.println("User ID " + this.ID);
 
@@ -49,7 +48,7 @@ public class DashboardView extends javax.swing.JFrame {
         animePanel.setLayout(new BoxLayout(animePanel, BoxLayout.Y_AXIS));
         animePanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
         animePanel.setAlignmentX(Component.LEFT_ALIGNMENT);
-        
+
         bookmarkPanel = new JPanel();
         bookmarkPanel.setLayout(new BoxLayout(bookmarkPanel, BoxLayout.Y_AXIS));
         bookmarkPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -122,10 +121,10 @@ public class DashboardView extends javax.swing.JFrame {
                         );
 
                         if (input == 0) {
-                           
-                           controllerBookmark.hapusBookmark(ID, anime.getId());
-                           controller.fetchAnime(page, ID);
-//                         
+
+                            controllerBookmark.hapusBookmark(ID, anime.getId());
+                            controller.fetchAnime(page, ID);
+//                          
 //                            
 //                            JOptionPane.showMessageDialog(null, "Berhasil menghapus data.");
 //
@@ -136,20 +135,18 @@ public class DashboardView extends javax.swing.JFrame {
 
                 });
             } else {
-                
+
                 bookmarkButton = new JButton("Bookmark");
                 bookmarkButton.addActionListener(new ActionListener() {
-                    
-                    
+
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         int userID = DashboardView.this.ID;
                         System.out.println("ID User " + userID);
                         PopUpView popUp = new PopUpView(anime, userID, DashboardView.this);
                         popUp.setVisible(true);
-                        
+
                     }
-                    
 
                 });
             }
@@ -168,7 +165,7 @@ public class DashboardView extends javax.swing.JFrame {
 
             animePanel.add(itemPanel);
         }
-        
+
         for (ModelBookmark bookmark : bookmarkList) {
             JPanel itemPanel2 = new JPanel(new BorderLayout(10, 0));
             itemPanel2.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -194,7 +191,6 @@ public class DashboardView extends javax.swing.JFrame {
 
 //            JLabel ratingLabel = new JLabel("Rating: " + anime.getRating());
 //            ratingLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
-
             String catatan = bookmark.getCatatan();
             if (catatan != null && catatan.length() > 250) {
                 catatan = catatan.substring(0, 250) + "...";
@@ -202,7 +198,43 @@ public class DashboardView extends javax.swing.JFrame {
             JLabel catatanLabel = new JLabel("<html><p style='width:600px;'>" + catatan + "</p></html>");
             catatanLabel.setFont(new Font("SansSerif", Font.PLAIN, 12));
 
-//            JButton bookmarkButton;
+            JButton editButton = new JButton("Edit");
+            JButton hapusButton = new JButton("Hapus");
+
+            editButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int userID = DashboardView.this.ID;
+                    System.out.println("ID User " + userID);
+                    System.out.println("Ini di popup" + bookmark.getId());
+                    PopUpView popUp = new PopUpView(bookmark, userID, DashboardView.this);
+                    popUp.setVisible(true);
+                }
+
+            });
+
+            hapusButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    int input = JOptionPane.showConfirmDialog(
+                            null,
+                            "Remove Bookmark " + bookmark.getAnimeTitle() + "?",
+                            "Hapus Mahasiswa",
+                            JOptionPane.YES_NO_OPTION
+                    );
+
+                    if (input == 0) {
+                        
+
+                        controllerBookmark.hapusBookmark(ID, bookmark.getIdAnime());
+                        controller.fetchAnime(page, ID);
+
+                        JOptionPane.showMessageDialog(null, "Berhasil menghapus data.");
+
+                    }
+                }
+
+            });
 //            boolean isBookmarked = false;
 //
 //            for (ModelBookmark bookmark : bookmarkList) {
@@ -227,7 +259,7 @@ public class DashboardView extends javax.swing.JFrame {
 //                        if (input == 0) {
 //                           
 //                           controllerBookmark.hapusBookmark(ID, anime.getId());
-////                              
+            ////                              
 ////                            
 ////                            JOptionPane.showMessageDialog(null, "Berhasil menghapus data.");
 ////
@@ -262,6 +294,10 @@ public class DashboardView extends javax.swing.JFrame {
             infoPanel2.add(catatanLabel);
 //            infoPanel2.add(Box.createVerticalStrut(5));
 //            infoPanel2.add(bookmarkButton);
+            infoPanel2.add(Box.createVerticalStrut(5));
+            infoPanel2.add(editButton);
+            infoPanel2.add(Box.createVerticalStrut(5));
+            infoPanel2.add(hapusButton);
 
             itemPanel2.add(imageLabel2, BorderLayout.WEST);
             itemPanel2.add(infoPanel2, BorderLayout.CENTER);
@@ -479,13 +515,15 @@ public class DashboardView extends javax.swing.JFrame {
     private void searchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchInputActionPerformed
-    public int getIdUser(){
+    public int getIdUser() {
         return this.ID;
     }
-    
-    public int getAnimePage(){
+
+    public int getAnimePage() {
         return this.page;
     }
+    
+
     /**
      * @param args the command line arguments
      */

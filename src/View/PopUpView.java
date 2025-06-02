@@ -6,6 +6,7 @@ package View;
 
 import Controller.ControllerBookmark;
 import Model.Anime.ModelAnime;
+import Model.Bookmark.ModelBookmark;
 
 /**
  *
@@ -17,7 +18,9 @@ public class PopUpView extends javax.swing.JFrame {
      * Creates new form PopUpView
      */
     public static ModelAnime animeBookmark;
+    public static ModelBookmark bookmarkUser;
     public static int ID;
+    public static int halaman;
     ControllerBookmark controller;
     public static DashboardView halamaDashboard;
 
@@ -28,8 +31,19 @@ public class PopUpView extends javax.swing.JFrame {
         this.halamaDashboard = halamanDashboard;
         jLabel1.setText("Judul Anime : " + anime.getTitle());
         jLabel2.setText("Score Anime : " + anime.getRating());
+        halaman = 1;
 
-       
+    }
+
+    public PopUpView(ModelBookmark bookmark, int ID, DashboardView halamanDashboard) {
+        initComponents();
+        bookmarkUser = bookmark;
+        this.ID = ID;
+        this.halamaDashboard = halamanDashboard;
+        jLabel1.setText("Judul Anime : " + bookmark.getAnimeTitle());
+        jLabel2.setText("Bookmark ID: " + bookmark.getId());
+        jTextArea1.setText(bookmark.getCatatan());
+        halaman = 2;
     }
 
     /**
@@ -152,9 +166,16 @@ public class PopUpView extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        controller = new ControllerBookmark(this, halamaDashboard); // Baru dibuat saat tombol ditekan
-        controller.tambahBookmark();
-        dispose();
+        if (halaman == 1) {
+            controller = new ControllerBookmark(this, halamaDashboard); // Baru dibuat saat tombol ditekan
+            controller.tambahBookmark();
+            dispose();
+        }else{
+            controller = new ControllerBookmark(this, halamaDashboard); // Baru dibuat saat tombol ditekan
+            controller.editBookmark();
+            dispose();
+        }
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -168,6 +189,9 @@ public class PopUpView extends javax.swing.JFrame {
 
     public int getUserID() {
         return ID;
+    }
+    public int getHalaman(){
+        return halaman;
     }
 
     /**
