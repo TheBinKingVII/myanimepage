@@ -32,6 +32,7 @@ public class PopUpView extends javax.swing.JFrame {
         jLabel1.setText("Judul Anime : " + anime.getTitle());
         jLabel2.setText("Score Anime : " + anime.getRating());
         halaman = 1;
+        jButton1.setText("Bookmark");
 
     }
 
@@ -43,6 +44,7 @@ public class PopUpView extends javax.swing.JFrame {
         jLabel1.setText("Judul Anime : " + bookmark.getAnimeTitle());
         jLabel2.setText("Bookmark ID: " + bookmark.getId());
         jTextArea1.setText(bookmark.getCatatan());
+        jButton1.setText("Update");
         halaman = 2;
     }
 
@@ -192,6 +194,9 @@ public class PopUpView extends javax.swing.JFrame {
     }
     public int getHalaman(){
         return halaman;
+    }
+    public ModelBookmark getBookmark() {
+        return bookmarkUser;
     }
 
     /**

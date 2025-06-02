@@ -31,16 +31,24 @@ public class ControllerBookmark {
 
         this.halamanPopUp = halamanPopUp;
         this.daoBookmark = new DAOBookmark();
-        anime = halamanPopUp.getAnime();
-        bookmark = new ModelBookmark();
-        bookmark.setIdUser(halamanPopUp.getUserID());
-        bookmark.setIdAnime(anime.getId());
-        bookmark.setAnimeTitle(anime.getTitle());
-        bookmark.setImgUrlAnime(anime.getImageUrl());
-        bookmark.setCatatan(halamanPopUp.getCatatan());
         this.halamanDashboard = halamaDashboard;
         controllerAnime = new ControllerAnime(this.halamanDashboard);
 
+        // Check if we're in edit mode (halaman == 2) or add mode (halaman == 1)
+        if (halamanPopUp.getHalaman() == 2) {
+            // Edit mode - use bookmark data
+            bookmark = halamanPopUp.getBookmark();
+            bookmark.setCatatan(halamanPopUp.getCatatan()); // Update catatan with new text
+        } else {
+            // Add mode - use anime data to create new bookmark
+            anime = halamanPopUp.getAnime();
+            bookmark = new ModelBookmark();
+            bookmark.setIdUser(halamanPopUp.getUserID());
+            bookmark.setIdAnime(anime.getId());
+            bookmark.setAnimeTitle(anime.getTitle());
+            bookmark.setImgUrlAnime(anime.getImageUrl());
+            bookmark.setCatatan(halamanPopUp.getCatatan());
+        }
     }
 
     public ControllerBookmark(DashboardView halamanDashboard) {
