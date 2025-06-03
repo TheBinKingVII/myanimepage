@@ -33,8 +33,6 @@ public class PopUpView extends javax.swing.JFrame {
         jLabel2.setText("Score Anime : " + anime.getRating());
         halaman = 1;
         jButton1.setText("Bookmark");
-        this.setLocationRelativeTo(null);
-
 
     }
 
@@ -48,7 +46,6 @@ public class PopUpView extends javax.swing.JFrame {
         jTextArea1.setText(bookmark.getCatatan());
         jButton1.setText("Update");
         halaman = 2;
-        this.setLocationRelativeTo(null);
     }
 
     /**

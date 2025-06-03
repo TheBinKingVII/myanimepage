@@ -6,10 +6,8 @@ package View;
 
 import Controller.ControllerAnime;
 import Controller.ControllerBookmark;
-import Controller.ControllerUser;
 import Model.Anime.ModelAnime;
 import Model.Bookmark.ModelBookmark;
-import Model.Users.ModelUser;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -33,9 +31,7 @@ public class DashboardView extends javax.swing.JFrame {
     private JPanel bookmarkPanel;
    
     ControllerAnime controller;
-    ControllerUser controllerUser; 
     ControllerBookmark controllerBookmark;
-    ModelUser dataUser;
 
     public static int ID;
     int page;
@@ -45,7 +41,6 @@ public class DashboardView extends javax.swing.JFrame {
         this.ID = ID;
         this.page = page;
         controller = new ControllerAnime(this);
-        controllerUser = new ControllerUser(this);
 
         System.out.println("User ID " + this.ID);
 
@@ -64,16 +59,11 @@ public class DashboardView extends javax.swing.JFrame {
         jScrollPane2.setViewportView(bookmarkPanel);
         controllerBookmark = new ControllerBookmark(this);
         controller.fetchAnime(this.page, this.ID);
-        dataUser = controllerUser.fetchUser(this.ID);
-        jLabel2.setText(dataUser.getUsername());
-        
-        
     }
 
     public void displayAnimeList(List<ModelAnime> animeList, List<ModelBookmark> bookmarkList) {
         animePanel.removeAll();
         bookmarkPanel.removeAll();
-        
 
         for (ModelAnime anime : animeList) {
             JPanel itemPanel = new JPanel(new BorderLayout(10, 0));
@@ -334,8 +324,6 @@ public class DashboardView extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -365,44 +353,21 @@ public class DashboardView extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("jLabel2");
-
-        jButton1.setText("LogOut");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(99, 99, 99)
+                .addGap(89, 89, 89)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(24, 24, 24))
+                .addContainerGap(111, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(96, 96, 96)
+                .addGap(97, 97, 97)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton1)
-                .addGap(20, 20, 20))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
@@ -550,26 +515,6 @@ public class DashboardView extends javax.swing.JFrame {
     private void searchInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchInputActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_searchInputActionPerformed
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        int input = JOptionPane.showConfirmDialog(
-                            null,
-                            "Anda ingin Logout?",
-                            "Log Out",
-                            JOptionPane.YES_NO_OPTION
-                    );
-
-                    if (input == 0) {
-                        
-                        LoginView login = new LoginView();
-                        login.setVisible(true);
-                        this.dispose();
-
-                    }
-        
-        
-    }//GEN-LAST:event_jButton1ActionPerformed
     public int getIdUser() {
         return this.ID;
     }
@@ -621,9 +566,7 @@ public class DashboardView extends javax.swing.JFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
