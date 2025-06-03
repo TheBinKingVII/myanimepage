@@ -22,6 +22,7 @@ public class ControllerUser {
 
     RegisterView halamanRegister;
     LoginView halamanLogin;
+    DashboardView halamanDashboard;
 
     InterfaceDAOUser daoUser;
     List<ModelUser> listUser;
@@ -33,6 +34,11 @@ public class ControllerUser {
 
     public ControllerUser(LoginView halamanLogin) {
         this.halamanLogin = halamanLogin;
+        this.daoUser = new DAOUser();
+    }
+    
+    public ControllerUser(DashboardView halamanDashboard){
+        this.halamanDashboard = halamanDashboard;
         this.daoUser = new DAOUser();
     }
 
@@ -102,6 +108,10 @@ public class ControllerUser {
             return false;
         }
         return false;
+    }
+    
+    public ModelUser fetchUser(int ID){
+        return daoUser.fetchUserByID(ID);
     }
 
 }
