@@ -4,11 +4,13 @@
  */
 package Model.Users;
 
+import Model.Universal;
+
 /**
  *
  * @author BINTORO
  */
-public class ModelUser {
+public class ModelUser extends Universal{
     private int id;
     private String username;
 

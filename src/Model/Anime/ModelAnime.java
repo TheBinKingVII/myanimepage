@@ -4,11 +4,13 @@
  */
 package Model.Anime;
 
+import Model.Universal;
+
 /**
  *
  * @author BINTORO
  */
-public class ModelAnime {
+public class ModelAnime extends Universal{
     private int id;
     private String title;
     private String imageUrl;

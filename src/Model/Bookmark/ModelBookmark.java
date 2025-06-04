@@ -4,11 +4,13 @@
  */
 package Model.Bookmark;
 
+import Model.Universal;
+
 /**
  *
  * @author BINTORO
  */
-public class ModelBookmark {
+public class ModelBookmark extends Universal{
 
     private int id;
     private int idUser;
