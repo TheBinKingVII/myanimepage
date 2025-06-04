@@ -15,4 +15,5 @@ public interface InterfaceDAOUser {
     public void update(ModelUser user);
     public void delete(int id);
     public List<ModelUser> getAll();
+    public ModelUser fetchUserByID(int ID);
 }
